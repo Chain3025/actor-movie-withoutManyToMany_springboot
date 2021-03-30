@@ -16,6 +16,6 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  @OneToMany(targetEntity = Actor.class,cascade = CascadeType.PERSIST)
+  @OneToMany(targetEntity = Actor.class,cascade = CascadeType.PERSIST,orphanRemoval = true) //orphanRemoval=true is used when mapping table record is delete and parent entity record is deleted but child entity reocrd is not deleted due to cascade.persist
   private List<Actor> actors;
 }
