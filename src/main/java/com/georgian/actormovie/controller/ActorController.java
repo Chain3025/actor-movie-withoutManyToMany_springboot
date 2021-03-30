@@ -5,6 +5,7 @@ import com.georgian.actormovie.entity.Movie;
 import com.georgian.actormovie.model.ActorModel;
 import com.georgian.actormovie.repository.ActorRepository;
 import com.georgian.actormovie.service.ActorService;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,4 +35,9 @@ public class ActorController {
   public Actor getActor(@PathVariable Long id){
     return actorRepository.findById(id).get();
   }
+  @GetMapping()
+  public List<Actor> getAllActor(){
+    return actorRepository.findAll();
+  }
+
 }

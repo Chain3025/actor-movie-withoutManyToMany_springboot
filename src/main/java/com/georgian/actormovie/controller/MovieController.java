@@ -1,8 +1,10 @@
 package com.georgian.actormovie.controller;
 
+import com.georgian.actormovie.entity.Actor;
 import com.georgian.actormovie.entity.Movie;
 import com.georgian.actormovie.repository.MovieRepository;
 import com.georgian.actormovie.service.MovieService;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +39,9 @@ public class MovieController {
   @GetMapping("/id/{id}")
   public Movie getMovie(@PathVariable Long id){
     return movieRepository.findById(id).get();
+  }
+  @GetMapping()
+  public List<Movie> getAllMovie(){
+    return movieRepository.findAll();
   }
 }

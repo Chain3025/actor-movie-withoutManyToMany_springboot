@@ -6,6 +6,7 @@ import com.georgian.actormovie.repository.ActorRepository;
 import com.georgian.actormovie.repository.MovieRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MovieService {
@@ -16,7 +17,7 @@ public class MovieService {
     this.movieRepository = movieRepository;
     this.actorRepository = actorRepository;
   }
-
+@Transactional
   public ResponseEntity<Object> addMovie(Movie movie){
     Movie newMovie = new Movie();
     newMovie.setName(movie.getName());
@@ -28,7 +29,7 @@ public class MovieService {
         return ResponseEntity.unprocessableEntity().body("failed to create actor");
       }
     }
-
+    newMovie.setDirector(movie.getDirector());
     newMovie.setActors(movie.getActors());
     Movie save = movieRepository.save(movie);
     if(movieRepository.findById(save.getId()).isPresent()){
@@ -42,6 +43,7 @@ what happens if the actor gets saved and an exception is thrown after that.
 the movie never gets saved.
 Solution : use @Transactional
  */
+
   public ResponseEntity<Object> deleteMovie(Long id){
     if(movieRepository.findById(id).isPresent()){
       movieRepository.deleteById(id);
