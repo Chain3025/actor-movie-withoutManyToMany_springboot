@@ -22,6 +22,7 @@ public class MovieService {
     newMovie.setName(movie.getName());
 
     for(Actor actor:movie.getActors()){
+
       Actor save = actorRepository.save(actor);
       if(!actorRepository.findById(save.getId()).isPresent()){
         return ResponseEntity.unprocessableEntity().body("failed to create actor");

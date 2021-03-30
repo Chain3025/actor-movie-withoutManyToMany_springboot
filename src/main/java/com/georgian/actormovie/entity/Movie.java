@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  @OneToMany(targetEntity = Actor.class,cascade = CascadeType.PERSIST,orphanRemoval = true) //orphanRemoval=true is used when mapping table record is delete and parent entity record is deleted but child entity reocrd is not deleted due to cascade.persist
+  @JoinColumn(name = "movie_id")
+  @OneToMany(targetEntity = Actor.class) //orphanRemoval=true is used when mapping table record is delete and parent entity record is deleted but child entity reocrd is not deleted due to cascade.persist
   private List<Actor> actors;
 }
