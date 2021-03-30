@@ -21,6 +21,6 @@ public class ActorService {
     actor.setFirstName(actorModel.getFirstName());
     actor.setLastName(actorModel.getLastName());
     actorRepository.save(actor);
-    return ResponseEntity.ok().body("succefully created actor")
+    return ResponseEntity.ok().body("succefully created actor");
   }
 }
