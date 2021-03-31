@@ -1,6 +1,7 @@
 package com.georgian.actormovie.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Director {
   private Long id;
   private String firstName;
   private String lastName;
-  @OneToOne(targetEntity = Movie.class,mappedBy = "director")
-  @JsonManagedReference
-  private Movie movie;
+  private String nationality;
+  private LocalDate dob;
+
 }

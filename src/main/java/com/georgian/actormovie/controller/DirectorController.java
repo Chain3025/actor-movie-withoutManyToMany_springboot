@@ -5,8 +5,11 @@ import com.georgian.actormovie.repository.DirectorRepository;
 import com.georgian.actormovie.service.DirectorService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,24 +31,25 @@ public class DirectorController {
 
   @PostMapping
   public ResponseEntity<Object> addDirector(@RequestBody Director director){
-    Director save = directorRepository.save(director);
-    return ResponseEntity.accepted().body("created director");
+    return  directorService.createDirector(director);
   }
-
+  @GetMapping("/id/{id}")
+  public ResponseEntity<Director> getDirector(@PathVariable Long id){
+    if(directorRepository.findById(id).isPresent()){
+      return new ResponseEntity<>(directorRepository.findById(id).get(), HttpStatus.OK);
+    }else
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  }
   @GetMapping
-  public List<Director> getDirector(){
+  public List<Director> getAllDirector(){
     return directorRepository.findAll();
   }
   @PutMapping()
-  public ResponseEntity<Object> putDirector(@RequestParam Long id,@RequestBody Director director){
-    if(directorRepository.findById(id).isPresent()){
-      Director director1 = directorRepository.findById(id).get();
-      if(director.getFirstName()!=null)
-        director1.setFirstName(director.getFirstName());
-      if(director.getLastName()!=null)
-        director1.setLastName(director.getLastName());
-      Director save = directorRepository.save(director1);
-      return ResponseEntity.accepted().body("updated director");
-    }else return ResponseEntity.unprocessableEntity().body("reocrd not found");
+  public ResponseEntity<Object> putDirector(@RequestParam Long id,@RequestBody Director director) {
+    return directorService.updateDirector(director, id);
+  }
+  @DeleteMapping("/id/{id}")
+  public ResponseEntity deleteDirector(@PathVariable Long id){
+    return directorService.deleteDirector(id);
   }
 }
