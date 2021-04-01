@@ -16,4 +16,8 @@ public interface MovieActorRepository extends JpaRepository<MovieActor,Long> {
   @Query(value = "select actor_id from movie_actor where movie_id= :id",
       nativeQuery = true)
   List<Long> actorIdByMovieId(@Param("id") Long id);
+
+  @Query(value = "select movie_id from movie_actor where actor_id= :id",
+      nativeQuery = true)
+  List<Long> movieIdByActorId(@Param("id") Long id);
 }

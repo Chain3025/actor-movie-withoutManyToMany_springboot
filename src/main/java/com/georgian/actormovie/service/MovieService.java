@@ -33,7 +33,7 @@ public class MovieService {
       MovieActor movieActor = new MovieActor();
       movieActor.setMovieId(save.getId());
       movieActor.setActorId(actorId);
-      MovieActor save1 = movieActorRepository.save(movieActor);
+      movieActorRepository.save(movieActor);
     });
   return ResponseEntity.accepted().body("movie added");
 }
