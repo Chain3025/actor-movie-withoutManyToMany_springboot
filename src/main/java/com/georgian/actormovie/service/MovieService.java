@@ -60,6 +60,7 @@ Solution : use @Transactional
           movieActorRepository.save(movieActor);
         }
       }
+      //you have to implement the deleted actor in movie's list
       return ResponseEntity.accepted().body("update movie");
     }else return ResponseEntity.unprocessableEntity().body("record not found");
   }

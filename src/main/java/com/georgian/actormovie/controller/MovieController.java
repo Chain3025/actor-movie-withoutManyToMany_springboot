@@ -52,6 +52,8 @@ public class MovieController {
   @PutMapping()
   public ResponseEntity updateMovie(@RequestParam Long id,@RequestBody MovieRequest movie){
     return movieService.updateMovie(id,movie);
+
+    //
   }
 
   @GetMapping("/id/{id}")
